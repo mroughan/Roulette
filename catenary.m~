@@ -1,0 +1,20 @@
+function [x, y] = catenary(theta, f)
+%
+% catenary.m, (c) Matthew Roughan, 2013
+%
+% created: 	Tue Dec 10 2013 
+% author:  	Matthew Roughan 
+% email:   	matthew.roughan@adelaide.edu.au
+% 
+% CATENARY: draw a catenary (a hanging chain) in the parameterisation
+%           corresponding to it as a roulette of a parabola
+%
+% INPUTS:
+%         
+%         
+%         
+% OUTPUTS:        
+%         
+%         
+%
+%

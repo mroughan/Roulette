@@ -1,0 +1,40 @@
+
+This package contains code for drawing "roulettes" which are
+mathematical curves created when one shape is rolled against another
+and we trace a location relative to the curve as it rolls (think
+spirographs).
+
+The code contains:
+    - roulette1  -- draws roulettes of specified curve when rolled along the x-axis
+    - roulette2  -- draws roulettes of one curve rolled against another
+
+In each of these cases curves are specified by a two functions: 
+    - one takes a parameters t (or vector of parameters) and returns
+      the appropriate [x,y] Cartesian coordinates along the curve.
+    - the other returns the derivatives [dx/dt, dy/dt] at the same
+      points 
+There are several examples of such functions in the packages
+    - ellipse and ellipsed (which can do a circle as a special case)
+    - hyperbola and hyperbolad
+    - parabola and parabolad
+
+There are also several precalculated roulettes to use as test
+functions
+    - unuldary gives the roulette of an ellipse
+    - nodary gives the roulette of a hyperbola, NB: there are two
+      modes for this: one does the actual roulette, and ther other
+      draws the curve known as the nodary, which is a concatenation of
+      the roulettes
+    - catenary gives the roulette of a parabola
+
+There is one function defined to help in calculations
+    - arclength numerically calculates arclengths along curves
+      in whatever parameterisation is being used
+
+There are a couple of test scripts, which also provide some examples
+of how to use the code:
+   - arclength_test: provides tests of the arclength code
+   - roulette1_test: shows a selection of standard roulettes both
+                     calculated using roulette1, and using the
+		     theoretical curve 
+   - roulette2_test: 

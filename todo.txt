@@ -1,0 +1,23 @@
+
+- complete tests
+  - make them all more rigorous
+  - include arclength calculations in each of the curves provided
+      to use as a test, not in the actual roulette calculations
+  - do nice plots for all tests
+      -limited number of rotated objects
+      -overlapping curves
+
+- put in autotests to look for the elliptic integrals
+  and replace with numeric (quad) routines if not available
+
+- do some animations
+
+- do roulettes between two curves
+   - add epicycloid, etc.
+   - inside v outside?
+
+
+
+
+
+

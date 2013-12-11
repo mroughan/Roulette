@@ -19,8 +19,8 @@ The code contains:
 
 In each of these cases curves are specified by a two functions: 
    - one takes a parameters t (or vector of parameters) and returns
-      the appropriate [x,y] Cartesian coordinates along the curve.
-   - the other returns the derivatives [dx/dt, dy/dt] at the same
+      the appropriate $(x,y)$ Cartesian coordinates along the curve.
+   - the other returns the derivatives $(dx/dt, dy/dt)$ at the same
       points
  
 There are several examples of such functions in the packages

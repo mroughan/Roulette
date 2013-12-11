@@ -1,6 +1,17 @@
 
 - complete tests
-  - make the roulette tests more rigourous
+  - make the roulette tests nicer
+      - have done ellipse/undulary
+      - need to do hyperbola, parabola, and cycloids
+      - would be nice to have a common harness for all of them?
+        - just give three functions
+	    - the rolled curve
+	    - its derivatives
+	    - its roulette function
+	    - and some parameters
+      - same with arclengths
+            - see below      
+
   - include arclength calculations in each of the curves provided
       to use as a test, not in the actual roulette calculations
        ???

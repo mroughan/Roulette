@@ -12,6 +12,8 @@ mathematical curves created when one shape is rolled against another
 and we trace a location relative to the curve as it rolls (think
 spirographs).
 
+Exact algorithms and sources are documented in the code.
+
 ### Dependencies
 
 Currently it can either compute elliptic integrals by numeric

@@ -59,9 +59,8 @@ There is one function defined to help in calculations
 
 There are a couple of test scripts, which also provide some examples
 of how to use the code:
-   - `arclength_test.m`: provides tests of the arclength code,
-                         assuming that the elliptic integral package
-			 is available. It does some diagnostic plots,
+   - `arclength_test.m`: provides tests of the arclength code. It does
+                         some diagnostic plots, 
 			 and outputs differences between numerical and
 			 theoretical arclengths. Some deviations at
 			 about the 1.0e-6 level occur.

@@ -93,9 +93,15 @@ M = k^2;
 % [F,E,Z] = elliptic12(pi/2 - theta,M);
 % ell = a*(e - E); % the arclength along the ellipse, from the semi-major axis
 
-% this is angle to negative y-axis
-[F,E,Z] = elliptic12(theta + pi/2,M);
-ell = a*E; % the arclength along the ellipse, from the semi-minor axis
+% compute the arclength along the ellipse, from the semi-minor axis (the negative y axis)
+if (elliptic_available)
+  [F,E,Z] = elliptic12(theta+pi/2, M);
+else
+  for i=1:length(theta)
+    E(i) = quad( @(t) sqrt(1 - M*sin(t).^2), 0, theta(i)+pi/2);
+  end
+end
+ell = a*E;
 
 for i=1:length(theta)
   g = @(t) ellipsed(parameters, t);
@@ -180,7 +186,16 @@ plot([x, x+dx]', [y, y+dy]', 'r');
 % theoretical arclengths for a hyperbola, Eagle, pp.271-2
 phi = atan(x*c/a^2);
 M = b^2/c^2;
-[F,E,Z] = elliptic12(phi,M);
+if (elliptic_available)
+  [F,E,Z] = elliptic12(phi, M);
+else
+  for i=1:length(theta)
+    E(i) = quad( @(t) sqrt(1 - M*sin(t).^2), 0, phi(i));
+    F(i) = quad( @(t) 1./sqrt(1 - M*sin(t).^2), 0, phi(i));
+  end
+end
+F = F';
+E = E';
 ell = c*(sqrt(1-M*sin(phi).^2).*tan(phi) + (1-M)*F - E);
 
 for i=1:length(mu)

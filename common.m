@@ -24,6 +24,8 @@ version = '';
 %    use numerical integration to compute
 %
 elliptical_int_path = '/home/mroughan/src/matlab/elliptic';
+% uncomment this if you don't have the package
+% elliptical_int_path = '';
 if (exist('elliptic12.m', 'file'))
   path(path,elliptical_int_path)
   elliptic_available = 1

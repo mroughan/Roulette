@@ -23,7 +23,8 @@ function [x,y] = undulary(a, b, theta)
 %     http://code.google.com/p/elliptic/
 %
 
-path(path,'/home/mroughan/src/matlab/elliptic')
+% find out if elliptic integrals are available
+common;
 
 if (nargin < 1)
   a = 2;
@@ -32,7 +33,7 @@ if (nargin < 2)
   b = 1.5;
 end
 if (nargin < 3)
-  u = -30:0.1:30;
+  theta = -30:0.1:30;
 end
 if (a<=0 | b<=0)
   error('a and b must be positive');
@@ -46,32 +47,24 @@ focus = sqrt(a^2-b^2); % distance from y-axis
 k = e;
 M = k^2;
 
-[F,E,Z] = elliptic12(theta, M);
+if (elliptic_available)
+  [F,E,Z] = elliptic12(theta, M);
+else
+  for i=1:length(theta)
+    E(i) = quad( @(t) sqrt(1 - M*sin(t).^2), 0, theta(i);
+  end
+end
 ell = a*E; 
-
-% % old complicated form
-% dsdtheta = a*sqrt(1 - e^2*sin(theta).^2);
-% x = ( a*focus*cos(theta) - (a^2 - b^2)*cos(theta).*sin(theta)) ...
-%     ./ dsdtheta ...
-%     + ell;
-% y = (-b*focus*sin(theta) + a*b) ...
-%     ./ dsdtheta;
 
 % % my derivation
 % dsdthetaa = sqrt(1 - e^2*sin(theta).^2);
 % x = (focus*cos(theta)).*(1-e*sin(theta)) ./ dsdthetaa + ell;
 % y = (-b*e*sin(theta) + b) ./ dsdthetaa;
 
-% or later form
+% or even simpler
 tmp = sqrt( (1-e*sin(theta)) ./ ( 1+e*sin(theta)) ); 
 x = focus*cos(theta).*tmp + ell;
 y = b*tmp;
 
-% % % http://www.mathcurve.com/courbes2d/delaunay/delaunay.shtml
-% % %   which is the same, but with the ellipse starting on its point end
-% [F,E,Z] = elliptic12(pi/2-theta, M);
-% [Fc,Ec,Zc] = elliptic12(pi/2, M);
-% ell = a*(Ec - E);
-% tmp =  sqrt( (1-e*cos(theta)) ./ ( 1+e*cos(theta)) ); 
-% x = ell - focus*sin(theta).* tmp;
-% y = b*tmp; 
+% and matched more or less to
+% http://www.mathcurve.com/courbes2d/delaunay/delaunay.shtml

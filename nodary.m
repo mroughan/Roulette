@@ -17,7 +17,7 @@ function [x,y] = nodary(a, b, theta)
 %
 % OUTPUTS:        
 %         (x,y) = points along the nodary
-%         
+%                     note these are 2xN vectors with one curve corresponding to each focus
 %
 % NB: this requires computation of elliptic integrals, which is done with
 %       % http://code.google.com/p/elliptic/
@@ -40,78 +40,74 @@ if (a<=0 | b<=0)
   error('a and b must be positive');
 end
 
+% find out if elliptic integrals are available
+common;
+
 % swap a and b, because conventional derivations are all based on 
 %   hyperbola being on its side, not upright
 temp = b; 
 b = a; 
 a = temp;
 
-% http://code.google.com/p/elliptic/
-path(path,'/home/mroughan/src/matlab/elliptic')
+% % solution from 
+% %    Oprea, p.148
+% %    or with correction: http://en.wikipedia.org/wiki/Nodary
+% %    similar Forsyth, p.417 
+% k = cos(atan(b/a))
+% M = k^2;
+% e = sqrt(a^2 + b^2)/a;
+% f = a*e;
+% c = f;  % just alternative names for focal length
+% [F,E,Z] = elliptic12(pi/2,M)
+% u = -F:0.01:F;
+% [sn,cn,dn] = ellipj(u,M); 
+% phi = asin(sn);
+% % [F,E,Z] = elliptic12(u,M);
+% [F,E,Z] = elliptic12(phi,M);
+% x =  a*sn + (a/k)*( (1-M)*u - E );
+% y = -a*cn + (a/k)*dn;
 
-% solution from 
-%    Oprea, p.148
-%    with correction: http://en.wikipedia.org/wiki/Nodary
-k = cos(atan(b/a))
-M = k^2;
-e = sqrt(a^2 + b^2)/a;
-f = a*e;
-c = f;  % just alternative names for focal length
-[sn,cn,dn] = ellipj(theta,M);
-[F,E,Z] = elliptic12(theta,M);
-x =  a*sn + (a/k)*( (1-M)*theta - E );
-y = -a*cn + (a/k)*dn;
+% figure(101)
+% hold off
+% plot(0,0)
+% hold on
+% plot(x, y)
 
-figure(101)
-hold off
-plot(0,0)
-hold on
-plot(x, y)
- 
-% solution from 
-%    Forsyth, p.417 
-alpha = atan(b/a);
-k = cos(atan(b/a))
-M = k^2;
-e = sqrt(a^2 + b^2)/a;
-f = a*e;
-c = f;  % just alternative names for focal length
-[sn,cn,dn] = ellipj(theta,M);
-[F,E,Z] = elliptic12(theta,M);
-x = c +  a*sn - a*( E - theta.*sin(alpha).^2).*sec(alpha);
-y = -a*cn + a*sec(alpha).*dn;
+% x =  a*sn - (a/k)*( (1-M)*u - E );
+% y = -a*cn - (a/k)*dn;
+% plot(x, y, 'x')
 
-figure(101)
-plot(x, y, 'c--')
- 
-% http://www.mathcurve.com/courbes2d/delaunay/delaunay.shtml
-%   NB: definition of elliptical integrals they are implicitly using implies
-%       we take [F,E,Z] = elliptic12(pi/2-theta, M);
-%   also have to swap the meanings of a and b at the moment
-c = sqrt(a^2 + b^2);
-e = c/a;
-k = 1/e
-M = k^2;
-[F,E,Z] = elliptic12(pi/2-theta, M);
-[Fc,Ec,Zc] = elliptic12(pi/2, M);
-ell = c*(Ec - E) - (b^2/a)*(Fc - F);
-tmp =  sqrt( (e-cos(theta)) ./ ( e+cos(theta)) ); 
-x = ell - a*sin(theta).* tmp;
-y = b*tmp;
+% % http://www.mathcurve.com/courbes2d/delaunay/delaunay.shtml
+% %   NB: definition of elliptical integrals they are implicitly using implies
+% %       we take [F,E,Z] = elliptic12(pi/2-theta, M);
+% %   also have to swap the meanings of a and b at the moment
+% c = sqrt(a^2 + b^2);
+% e = c/a;
+% k = 1/e
+% M = k^2;
+% [F,E,Z] = elliptic12(pi/2-theta, M);
+% [Fc,Ec,Zc] = elliptic12(pi/2, M);
+% ell = c*(Ec - E) - (b^2/a)*(Fc - F);
+% tmp =  sqrt( (e-cos(theta)) ./ ( e+cos(theta)) ); 
+% x = ell - a*sin(theta).* tmp;
+% y = b*tmp;
 
-figure(101)
-plot(x,y,'r--'); 
+% figure(101)
+% plot(x,y,'r--'); 
 
 % solution from Bendito et al
 %   assuming a and b have been swapped around
 t = theta / 3; 
 g = @(z) sqrt(c^2*cosh(z).^2 - a^2);
-for i=1:length(theta)
-  ell(i) = quad(g, 0, t(i) );
+if (elliptic_available)
+  phi = atan(c*sinh(t)/b); % convert to coordinates used in calculating arclength
+  [F,E,Z] = elliptic12(phi,M);
+  ell = c*(sqrt(1-M*sin(phi).^2).*tan(phi) + (1-M)*F - E);
+else
+  for i=1:length(theta)
+    ell(i) = quad(g, 0, t(i) );
+  end
 end
-phi = atan(c*sinh(t)/b); % convert to coordinates used in calculating arclength
-[F,E,Z] = elliptic12(phi,M);
-ell = c*(sqrt(1-M*sin(phi).^2).*tan(phi) + (1-M)*F - E);
 
 tmp = g(t);
 x1 = ell - c*sinh(t).*(c*cosh(t) - a)./tmp;
@@ -121,10 +117,10 @@ y2 = -b*(c*cosh(t) + a) ./ tmp;
 x = x2;
 y = y2;
 figure(101)
-plot(x1,y1,'g-'); 
-plot(x2,y2,'g--'); 
-x = [x1, NaN, x2];
-y = [y1, NaN, y2];
+plot(x1,y1,'g--'); 
+plot(x2,y2,'g-'); 
+x = [x1; x2]';
+y = [y1; y2]';
 
 
 

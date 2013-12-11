@@ -17,3 +17,16 @@ set(0,'DefaultLineLinewidth', 3);
 set(0,'DefaultAxesLineWidth', 3); 
 version = '';
 
+%
+% add in the path to the package
+%    http://code.google.com/p/elliptic/
+% or otherwise
+%    use numerical integration to compute
+%
+elliptical_int_path = '/home/mroughan/src/matlab/elliptic';
+if (exist('elliptic12.m', 'file'))
+  path(path,elliptical_int_path)
+  elliptic_available = 1
+else
+  elliptic_available = 0
+end

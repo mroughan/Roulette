@@ -11,6 +11,15 @@ mathematical curves created when one shape is rolled against another
 and we trace a location relative to the curve as it rolls (think
 spirographs).
 
+### Dependencies
+
+Currently it can either compute elliptic integrals by numeric
+integration (which is a bit crude), or using the package
+at http://code.google.com/p/elliptic/. If you want to use the latter,
+then you need to set the path to find it in `common.m`. Some of the
+tests assume you have the second more accurate method for doing
+calculations of arc lengths. 
+
 ### Contents
 
 The code contains:
@@ -49,12 +58,21 @@ There is one function defined to help in calculations
 
 There are a couple of test scripts, which also provide some examples
 of how to use the code:
-   - `arclength_test.m`: provides tests of the arclength code
+   - `arclength_test.m`: provides tests of the arclength code,
+                         assuming that the elliptic integral package
+			 is available.
    - `roulette1_test.m`: shows a selection of standard roulettes both
                        calculated using roulette1, and using the
 		       theoretical curve 
    - `roulette2_test.m`: tests a selection of standard roulettes formed
                        from two curves
+
+
+### Examples
+
+For examples of how to use the code see 
+   - `roulette1_test.m`
+   - `roulette2_test.m`
 
 
 Matt Roughan, 2013

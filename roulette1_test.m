@@ -155,6 +155,14 @@ plot(x,y, 'b+')
 figure(3)
 plot(x_nodary,y_nodary, 'm--');
 
+k = cos(atan(a/b));
+M = k^2;
+[Fc,Ec,Zc] = elliptic12(pi/2, M);
+x_lim1 = b + c*((1-M)*Fc - Ec);
+x_lim2 = -b + c*((1-M)*Fc - Ec);
+y_lim = a;
+plot([x_lim1 -x_lim1 x_lim2 -x_lim2], [y_lim y_lim -y_lim -y_lim], 'kd');
+
 %
 % do a cyclcoid, http://en.wikipedia.org/wiki/Cycloid
 % 

@@ -9,8 +9,9 @@
 %
 % tests of ellipse and hyperbola lengths need incomplete elliptical integrals
 %    http://code.google.com/p/elliptic/
-path(path,'/home/mroughan/src/matlab/elliptic')
 
+clear;
+common;
 
 % 
 % start with a circle

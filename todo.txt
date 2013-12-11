@@ -10,11 +10,10 @@
 - put in autotests to look for the elliptic integrals
   and replace with numeric (quad) routines if not available
 
-- do some animations
+- do nice views
+   - some plots
+   - some animations
 
-- do roulettes between two curves
-   - add epicycloid, etc.
-   - inside v outside?
 
 
 

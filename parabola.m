@@ -8,7 +8,7 @@ function [points, s] = parabola(parameters, x)
 % 
 % PARABOLA 
 %         parabola with vertical axis of symmetry
-%                    y = (x-h).^2 / (4*f) + k
+%                    y = (x-x0).^2 / (4*f) + y0
 %
 % INPUTS:
 %         parameters = [x0, y0, f]
@@ -29,7 +29,7 @@ f = parameters(3);
 y = (x-x0).^2 / (4*f) + y0;
 points = [x,y];
 
-% arclengths
+% arclengths from the vertex
 %    http://en.wikipedia.org/wiki/Arc_length#Length_of_an_arc_of_a_parabola
 h = (x-x0)/2;
 q = sqrt(f.^2 + h.^2);

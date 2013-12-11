@@ -60,7 +60,10 @@ There are a couple of test scripts, which also provide some examples
 of how to use the code:
    - `arclength_test.m`: provides tests of the arclength code,
                          assuming that the elliptic integral package
-			 is available.
+			 is available. It does some diagnostic plots,
+			 and outputs differences between numerical and
+			 theoretical arclengths. Some deviations at
+			 about the 1.0e-6 level occur.
    - `roulette1_test.m`: shows a selection of standard roulettes both
                        calculated using roulette1, and using the
 		       theoretical curve 

@@ -4,17 +4,17 @@ Roulette
 Compute roulette curves (derived by rolling one curve against another), in matlab.
 
 
-## Description
+### Description
 
 This package contains code for drawing "roulettes" which are
 mathematical curves created when one shape is rolled against another
 and we trace a location relative to the curve as it rolls (think
 spirographs).
 
-## Contents
+### Contents
 
 The code contains:
-   - roulette1.m: calculates roulettes of specified curve when rolled along the x-axis
+   - `roulette1.m`: calculates roulettes of specified curve when rolled along the x-axis
    - roulette2.m: calculates roulettes of one curve rolled against another
 
 In each of these cases curves are specified by a two functions: 

@@ -32,3 +32,4 @@ if (exist('elliptic12.m', 'file'))
 else
   elliptic_available = 0
 end
+

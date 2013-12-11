@@ -21,6 +21,13 @@ then you need to set the path to find it in `common.m`. Some of the
 tests assume you have the second more accurate method for doing
 calculations of arc lengths. 
 
+### Install
+    
+Put the files in a directory that Matlab can see, and edit the
+`common.m` file to either include the elliptic integral code or
+not. Then run the tests to see if everything works, and use them as an
+example to get things going.
+
 ### Contents
 
 The code contains:
@@ -70,12 +77,23 @@ of how to use the code:
    - `roulette2_test.m`: tests a selection of standard roulettes formed
                        from two curves
 
+The two directories:
+   - Plots/
+   - Animations/
+
+contain output from examples.
 
 ### Examples
 
 For examples of how to use the code see 
    - `roulette1_test.m`
    - `roulette2_test.m`
+   - `roulette_animate.m`
+
+The test code does a few plots, which go in the Plots/ directory.
+
+There is also an script that will create some animations in the
+Animations/ directory.
 
 
 Matt Roughan, 2013

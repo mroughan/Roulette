@@ -14,37 +14,37 @@ spirographs).
 ## Contents
 
 The code contains:
-    - roulette1.m  -- calculates roulettes of specified curve when rolled along the x-axis
-    - roulette2.m  -- calculates roulettes of one curve rolled against another
+   - roulette1.m: calculates roulettes of specified curve when rolled along the x-axis
+   - roulette2.m: calculates roulettes of one curve rolled against another
 
 In each of these cases curves are specified by a two functions: 
-    - one takes a parameters t (or vector of parameters) and returns
+   - one takes a parameters t (or vector of parameters) and returns
       the appropriate [x,y] Cartesian coordinates along the curve.
-    - the other returns the derivatives [dx/dt, dy/dt] at the same
+   - the other returns the derivatives [dx/dt, dy/dt] at the same
       points 
 There are several examples of such functions in the packages
-    - ellipse and ellipsed (which can do a circle as a special case)
-    - hyperbola and hyperbolad
-    - parabola and parabolad
+   - ellipse and ellipsed (which can do a circle as a special case)
+   - hyperbola and hyperbolad
+   - parabola and parabolad
 
 There are also several precalculated roulettes to use as test
 functions
-    - cycloid.m: roulette of a circle on a line
-                (includes prolate and curtate cases)
-    - epitrochoid.m: roulette of a circle on the outside of another circle
-                (epicycloid is a special case)
-    - hypotrochoid.m: roulette of a circle on the inside of another circle
+   - cycloid.m: roulette of a circle on a line
+                    (includes prolate and curtate cases)
+   - epitrochoid.m: roulette of a circle on the outside of another circle
+                    (epicycloid is a special case)
+   - hypotrochoid.m: roulette of a circle on the inside of another circle
                 (hypocycloid is a special case)
-    - undulary.m gives the roulette of an ellipse along a straight line
-    - nodary.m gives the roulette of a hyperbola, 
+   - undulary.m gives the roulette of an ellipse along a straight line
+   - nodary.m gives the roulette of a hyperbola, 
         NB: there are two curves created by this, one for each focus
 	of the hyperbola
-    - catenary.m gives the roulette of a parabola
-    - cissoid.m of Dioclese: the roulette of two parabolas
+   - catenary.m gives the roulette of a parabola
+   - cissoid.m of Dioclese: the roulette of two parabolas
 
 There is one function defined to help in calculations
-    - arclength numerically calculates arclengths along curves
-      in whatever parameterisation is being used
+   - arclength numerically calculates arclengths along curves
+     in whatever parameterisation is being used
 
 There are a couple of test scripts, which also provide some examples
 of how to use the code:

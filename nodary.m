@@ -1,4 +1,4 @@
-function [x,y] = nodary(a, b, theta)
+function [x,y, x_lim, y_lim] = nodary(a, b, theta)
 %
 % nodary.m, (c) Matthew Roughan, 2013
 %
@@ -12,33 +12,29 @@ function [x,y] = nodary(a, b, theta)
 %                  http://books.google.com.au/books?id=xb48zk0wJfIC&pg=PA148&lpg=PA148&dq=nodary+parametric+equation&source=bl&ots=RVXw0BYeRW&sig=47ZnhnNY3YtsnxWzw3lUoNdwPjY&hl=en&sa=X&ei=uX-VUqrLFKahige1pYGYCQ&ved=0CEMQ6AEwAw#v=onepage&q=nodary%20parametric%20equation&f=false
 %
 % INPUTS:
-%         a, b = parameters of hyperbola
+%         a, b = parameters of hyperbola   -x^2/a^2 + y^2/b^2 = 1
 %         theta = vector of points along which to calculate it
 %
 % OUTPUTS:        
 %         (x,y) = points along the nodary
 %                     note these are 2xN vectors with one curve corresponding to each focus
-%
-% NB: this requires computation of elliptic integrals, which is done with
-%       % http://code.google.com/p/elliptic/
-% 
-% but R2013b apparently has an elliptical integral calculation 
-%       http://www.mathworks.com.au/help/symbolic/elliptice.html
-% so we can replace this bit when we ahve the latest version
+%         x_lim = x values of 4 limiting points
+%         y_lim = y_values of 4 limiting points
 %
 
 if (nargin < 1)
-  a = 0.9;
+  a = 0.9; % default
 end
 if (nargin < 2)
-  b = 1.7;
+  b = 1.7; % default
 end
 if (nargin < 3)
-  theta = -30:0.1:30;
+  theta = -30:0.1:30; % default
 end
 if (a<=0 | b<=0)
   error('a and b must be positive');
 end
+theta = theta(:); % convert to column vectors
 
 % find out if elliptic integrals are available
 common;
@@ -49,15 +45,16 @@ temp = b;
 b = a; 
 a = temp;
 
+k = cos(atan(b/a));
+M = k^2;
+e = sqrt(a^2 + b^2)/a;
+f = a*e;
+c = f;  % f and c just alternative names for focal length
+
 % % solution from 
 % %    Oprea, p.148
 % %    or with correction: http://en.wikipedia.org/wiki/Nodary
 % %    similar Forsyth, p.417 
-% k = cos(atan(b/a))
-% M = k^2;
-% e = sqrt(a^2 + b^2)/a;
-% f = a*e;
-% c = f;  % just alternative names for focal length
 % [F,E,Z] = elliptic12(pi/2,M)
 % u = -F:0.01:F;
 % [sn,cn,dn] = ellipj(u,M); 
@@ -95,10 +92,12 @@ a = temp;
 % figure(101)
 % plot(x,y,'r--'); 
 
-% solution from Bendito et al
+% solution from Enrique Bendito, Mark J. Bowick and Agustin Medina, 
+%   "Delaunay Surfaces", http://arxiv.org/abs/1305.5681
 %   assuming a and b have been swapped around
 t = theta / 3; 
 g = @(z) sqrt(c^2*cosh(z).^2 - a^2);
+ell = zeros(size(t));
 if (elliptic_available)
   phi = atan(c*sinh(t)/b); % convert to coordinates used in calculating arclength
   [F,E,Z] = elliptic12(phi,M);
@@ -116,12 +115,18 @@ y1 =  b*(c*cosh(t) - a) ./ tmp;
 y2 = -b*(c*cosh(t) + a) ./ tmp;
 x = x2;
 y = y2;
-figure(101)
-plot(x1,y1,'g--'); 
-plot(x2,y2,'g-'); 
+% figure(101)
+% plot(x1,y1,'g--'); 
+% plot(x2,y2,'g-'); 
 x = [x1; x2]';
 y = [y1; y2]';
 
 
+% also compute limiting points for nodary
+[Fc, Ec] = ellipke(M);
+x_lim1 =  a + c*((1-M)*Fc - Ec);
+x_lim2 = -a + c*((1-M)*Fc - Ec);
+x_lim = [x_lim1 -x_lim1 x_lim2 -x_lim2];
+y_lim = [b b -b -b];
 
 

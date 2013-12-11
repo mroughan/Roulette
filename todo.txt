@@ -1,8 +1,9 @@
 
 - complete tests
-  - make them all more rigorous
+  - make the roulette tests more rigourous
   - include arclength calculations in each of the curves provided
       to use as a test, not in the actual roulette calculations
+       ???
   - do nice plots for all tests
       -limited number of rotated objects
       -overlapping curves

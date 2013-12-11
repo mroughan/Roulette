@@ -194,8 +194,8 @@ else
     F(i) = quad( @(t) 1./sqrt(1 - M*sin(t).^2), 0, phi(i));
   end
 end
-F = F';
-E = E';
+F = F(:);
+E = E(:);
 ell = c*(sqrt(1-M*sin(phi).^2).*tan(phi) + (1-M)*F - E);
 
 for i=1:length(mu)

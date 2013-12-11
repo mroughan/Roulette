@@ -11,11 +11,12 @@
 %
 clear;
 common;
-plotdir = '/home/mroughan/Reports/CatenaryMonograph/Figs/';
 
 % 
 % ellipse - undulary test
 % 
+
+% define and draw the ellipse
 a = 2;
 b = 1.5;
 parameters = [0, b, a, b]; 
@@ -29,32 +30,40 @@ plot(x, y);
 hold on
 axis equal
 
+% calculate the exact undulary
+[x_undulary,y_undulary] = undulary(a, b, -10:0.1:10);
+plot(x_undulary,y_undulary, 'm-');
+plot(sqrt(a^2-b^2),b, 'bo', 'linewidth', 5)
+
+% use roulette1 to calculate the roulette
+M = [x, y];
 f = @(t) ellipse(parameters, t);
 F = @(t) ellipsed(parameters, t);
-M = [x, y];
-s = 0:0.4:14;
+s = 2:2:14; 
 [u, Md] = roulette1(f, F, [sqrt(a^2-b^2),b], -pi/2, s);
-plot(Md(:,1), Md(:,2), 'go')
-points_u = ellipse(parameters, u);
-x = points_u(:,1);
-y = points_u(:,2);
-plot(x,y, 'b+')
+% plot the focus at the points its been rolled to
+plot(Md(:,1), Md(:,2), 'ro', 'linewidth', 5)
+
+% points_u = ellipse(parameters, u);
+% x = points_u(:,1);
+% y = points_u(:,2);
+% plot(x,y, 'b+')
+
+% draw the rolled ellipse
 for i=1:length(s)
   [u, Md] = roulette1(f, F, M, -pi/2, s(i));
-  plot(Md(:,1), Md(:,2), 'r')
+  plot(Md(:,1), Md(:,2), 'r', 'linewidth', 1)
 end
 
-% need to calculate and plot
-[x_undulary,y_undulary] = undulary(a, b, -10:0.1:10);
-plot(x_undulary,y_undulary, 'm--');
-
-
+% print out the plot
+set(gca, 'xlim', [-5 15]);
+set(gca, 'ylim', [0 5]);
 set(gcf, 'PaperUnits', 'centimeters')
-set(gcf, 'PaperPosition', [0 0 20 20])
+set(gcf, 'PaperPosition', [0 0 40 10])
 filename = sprintf('%s/roulette_ellipse%s.%s', plotdir, version, suffix)
 print(device, filename);
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % 
 % parabola - catenary test
@@ -151,17 +160,10 @@ plot(x,y, 'b+')
 
 % calculate exact curve
 %   only works if elliptical integral code is available
-[x_nodary,y_nodary] = nodary(a, b, -10:0.1:10);
+[x_nodary,y_nodary,x_lim,y_lim] = nodary(a, b, -10:0.1:10);
 figure(3)
 plot(x_nodary,y_nodary, 'm--');
-
-k = cos(atan(a/b));
-M = k^2;
-[Fc,Ec,Zc] = elliptic12(pi/2, M);
-x_lim1 = b + c*((1-M)*Fc - Ec);
-x_lim2 = -b + c*((1-M)*Fc - Ec);
-y_lim = a;
-plot([x_lim1 -x_lim1 x_lim2 -x_lim2], [y_lim y_lim -y_lim -y_lim], 'kd');
+plot(x_lim, y_lim, 'ms');
 
 %
 % do a cyclcoid, http://en.wikipedia.org/wiki/Cycloid

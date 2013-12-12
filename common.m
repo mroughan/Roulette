@@ -16,6 +16,9 @@ set(0,'DefaultAxesFontsize', 24);
 set(0,'DefaultLineLinewidth', 3);
 set(0,'DefaultAxesLineWidth', 3); 
 version = '';
+path(path,'./Curves/)
+path(path,'./Tests_and_Examples/)
+path(path,'./Roulettes/)
 
 %
 % add in the path to the package

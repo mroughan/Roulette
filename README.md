@@ -30,6 +30,8 @@ Put the files in a directory that Matlab can see, and edit the
 not. Then run the tests to see if everything works, and use them as an
 example to get things going.
 
+`common.m` also adds some paths for the subdirectories.
+
 ### Contents
 
 The code contains:
@@ -42,13 +44,13 @@ In each of these cases curves are specified by a two functions:
    - the other returns the derivatives $(dx/dt, dy/dt)$ at the same
       points
  
-There are several examples of such functions in the packages
+There are several examples of such functions in the directory `Curves/`
    - `ellipse.m` and `ellipsed.m` (which can do a circle as a special case)
    - `hyperbola.m` and `hyperbolad.m`
    - `parabola.m` and `parabolad.m`
 
 There are also several precalculated roulettes to use as test
-functions
+functions in the directory `Roulettes/`
    - `cycloid.m``: roulette of a circle on a line
                     (includes prolate and curtate cases)
    - `epitrochoid.m`: roulette of a circle on the outside of another circle
@@ -67,7 +69,7 @@ There is one function defined to help in calculations
      in whatever parameterisation is being used
 
 There are a couple of test scripts, which also provide some examples
-of how to use the code:
+of how to use the code in the directory 'Tests_and_Examples/'
    - `arclength_test.m`: provides tests of the arclength code. It does
                          some diagnostic plots, 
 			 and outputs differences between numerical and

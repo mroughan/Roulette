@@ -20,11 +20,22 @@ function derivatives = ellipsed(parameters, theta)
 %                        [dx,dy] = are derivatives WRT theta at the points on the ellipse
 %         
 %
+%
+
+% check inputs
 theta = theta(:);  % make it a column vector
+if (length(parameters) < 4)
+  error('error parameters = [x0, y0, a, b]');
+end
 x0 = parameters(1);
 y0 = parameters(2);
 a = parameters(3);
 b = parameters(4);
+if (b <= 0 | a < b)
+  error('error: should have a >= b > 0');
+end
+
+%  calculate the derivatives
 dx = -a*sin(theta);
 dy =  b*cos(theta);
 derivatives = [dx, dy];

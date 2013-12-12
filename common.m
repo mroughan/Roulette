@@ -19,6 +19,7 @@ version = '';
 path(path,[pwd '/Curves/']);
 path(path,[pwd '/Tests_and_Examples/']);
 path(path,[pwd '/Roulettes/']);
+debug = 0;
 
 %
 % add in the path to the package
@@ -34,11 +35,16 @@ elliptical_int_path = '/home/mroughan/src/matlab/elliptic';
 if (exist([elliptical_int_path '/elliptic12.m'], 'file'))
   path(path,elliptical_int_path)
   elliptic_available = 1;
-  fprintf('elliptic integral code available.\n');
+  if (debug)
+   fprintf('elliptic integral code available.\n');
+  end
 else
   elliptic_available = 0;
-  fprintf('elliptic integral code unavailable, using numerical integration instead.\n');
+  if (debug)
+    fprintf('elliptic integral code unavailable, using numerical integration instead.\n');
+  end
 end
+
 % 
 % but Matlab R2013b apparently has an elliptical integral calculation 
 %       http://www.mathworks.com.au/help/symbolic/elliptice.html

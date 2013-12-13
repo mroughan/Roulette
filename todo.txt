@@ -9,10 +9,21 @@
       - need to do gif script
 
 - any other curves for roulette examples?
+   http://www.2dcurves.com/roulette/roulette.html
+   http://en.wikipedia.org/wiki/Roulette_%28curve%29
+   http://140.177.205.23/Roulette.html
+      hyperbola on a line, tracking the center, gives rectangular elastica
+      generally, tracking centre of a conic, get "Roulette de Sturm"
+         http://www.mathcurve.com/courbes2d/sturm/sturm.shtml
+      hyperbolic spiral
+      logarithmic spiral
+   also see Walker's paper
 
-- 
+   some of the "weird wheel curves"
 
-
+- add in routines for
+   - glisettes
+   - pedal curves
 
 
 

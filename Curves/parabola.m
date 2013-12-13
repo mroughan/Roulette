@@ -9,6 +9,10 @@ function [points, s] = parabola(parameters, x)
 % PARABOLA 
 %         parabola with vertical axis of symmetry
 %                    y = (x-x0).^2 / (4*f) + y0
+%         note that the parameterisation used for calculating the roulette is 
+%              x = 2 f sinh t
+%              y = f sinh^2 t
+%         so comparing to the roulette requires a parameter conversion
 %
 % INPUTS:
 %         parameters = [x0, y0, f]

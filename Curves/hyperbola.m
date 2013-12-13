@@ -16,7 +16,9 @@ function [point, s] = hyperbola(parameters, mu)
 %             (x0, y0) = centre
 %             (a,b) such that            (x-x0)^2/a^2 - (y-y0)^2/b^2 = -1
 %
-%         mu        = Nx1 column vector
+%         mu        = Nx1 column vector giving locations to calculate it
+%                       NB: we use mu, not 'theta' because in this parameterisation
+%                                ds ~ dmu (for large mu)
 %
 % OUTPUTS:        
 %         point = Nx2 set of (x,y) coordinates of points on the ellipse
@@ -37,9 +39,10 @@ b = parameters(4);
 
 % parametric equation of ellipse with 'cup' facing up and dowm
 %    NB: we are only returning the upper branch
-%    NB: take logs of mu to have more reasonable steps for mu
-x = x0 + a*sinh(log(abs(mu)+1)).*sign(mu);
-y = y0 + b*cosh(log(abs(mu)+1));
+%    NB: take logs of mu to have more reasonable steps for ds
+t = log(abs(mu)+1).*sign(mu);
+x = x0 + a*sinh(t);
+y = y0 + b*cosh(t);
 point = [x,y];
 
 % compute arclengths from the vertex
@@ -53,18 +56,16 @@ e = sqrt(a^2 + b^2)/b; % eccentricity
 c = b*e; % distance from centre to focus
 focal = c - b; % focal length, which gives y coordinate of focal point
 phi = atan((x-x0)*c/a^2);
-M = b^2/c^2;
+k = b/c;
 if (elliptic_available)
-  [F,E,Z] = elliptic12(phi, M);
+  [F,E,Z] = elliptic12(phi, k^2);
 else
   for i=1:length(theta)
-    E(i) = quad( @(t) sqrt(1 - M*sin(t).^2), 0, phi(i));
-    F(i) = quad( @(t) 1./sqrt(1 - M*sin(t).^2), 0, phi(i));
+    E(i) = quad( @(u) sqrt(1 - k^2*sin(u).^2), 0, phi(i));
+    F(i) = quad( @(u) 1./sqrt(1 - k^2*sin(u).^2), 0, phi(i));
   end
 end
 F = F(:);
 E = E(:);
-s = c*(sqrt(1-M*sin(phi).^2).*tan(phi) + (1-M)*F - E);
-
-
+s = c*(sqrt(1-k^2*sin(phi).^2).*tan(phi) + (1-k^2)*F - E);
 

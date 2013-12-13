@@ -26,8 +26,9 @@ x0 = parameters(1);
 y0 = parameters(2);
 a = parameters(3);
 b = parameters(4);
-dx = a*cosh(log(abs(mu)+1))./(abs(mu)+1);
-dy = b*sinh(log(abs(mu)+1)).*sign(mu)./(abs(mu)+1);
+t = log(abs(mu)+1).*sign(mu);
+dx = a*cosh(t)./(abs(mu)+1);
+dy = b*sinh(t)./(abs(mu)+1);
 derivatives = [dx, dy];  
 
 

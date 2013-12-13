@@ -1,4 +1,4 @@
-function [x, y] = catenary(f, t)
+function [x_cat, y_cat] = catenary(parameters, x)
 %
 % catenary.m, (c) Matthew Roughan, 2013
 %
@@ -13,13 +13,25 @@ function [x, y] = catenary(f, t)
 %           y = f cosh(x/f)
 %
 % INPUTS:
-%           f = focal length of parabola used to generate roulette
-%           t = parameters along catenary
+%           parameters = parameters of generating parabola = [x0, y0, f]
+%                          (x0,y0) ignored
+%                          f = focal length of parabola used to generate roulette
+%           x = x coordinates of the input curve (being rolled), i.e., the parabola
 %         
 % OUTPUTS:        
-%           [x,y] = points on the catenary
+%           [x_cat,y_cat] = points on the catenary
 %         
 %
 %
-x = f*t;
-y = f*cosh(t);
+
+% process inputs
+x = x(:);
+x0 = parameters(1);
+y0 = parameters(2);
+f = parameters(3);
+t = asinh(x/(2*f));
+
+% calculate catenary
+x_cat = f*t;
+y_cat = f*cosh(t);
+

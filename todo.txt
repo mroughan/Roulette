@@ -1,31 +1,16 @@
 
 - complete tests
-  - make the roulette tests nicer
-      - have done ellipse/undulary
-      - need to do hyperbola, parabola, and cycloids
-      - would be nice to have a common harness for all of them?
-        - just give three functions
-	    - the rolled curve
-	    - its derivatives
-	    - its roulette function
-	    - and some parameters
-      - same with arclengths
-            - see below      
+  - make the roulette2 tests similar to roulette1
 
-  - include arclength calculations in each of the curves provided
-      to use as a test, not in the actual roulette calculations
-       ???
   - do nice plots for all tests
-      -limited number of rotated objects
-      -overlapping curves
+      - add in a "line" from N to M to make the rotation more obvious
 
-- put in autotests to look for the elliptic integrals
-  and replace with numeric (quad) routines if not available
+  - use similar to create animations
+      - need to do gif script
 
-- do nice views
-   - some plots
-   - some animations
+- any other curves for roulette examples?
 
+- 
 
 
 

@@ -40,3 +40,4 @@ g = @(x) sqrt(sum(dfunc(x).^2, 2));
 for i=1:length(u1)
   s(i) = quad(g, u1(i), u2(i));
 end
+ 

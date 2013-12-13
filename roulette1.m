@@ -88,3 +88,4 @@ x =  (p-g).*dgds + (q-G).*dGds + s;
 y = -(p-g).*dGds + (q-G).*dgds;
 Md = [x, y];
 
+

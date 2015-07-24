@@ -10,8 +10,9 @@
 %
 %
 clear;
+path(path,'../');
 common;
-
+ 
 
 % 
 % epicycloid (roll one circle outside another)
@@ -24,7 +25,7 @@ r = 1;
 R = k*r;
 a = r;
 b = r;
-parameters1 = [0, r, -r, r];  % go round the 1st circle in the opposite direction
+parameters1 = [0, r,  r, r];  % go round the 1st circle in the opposite direction
 points1 = ellipse(parameters1, theta);
 parameters2 = [0, -R, R, R]; 
 points2 = ellipse(parameters2, theta);

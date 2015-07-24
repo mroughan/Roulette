@@ -15,10 +15,11 @@ set(0,'DefaultTextFontsize', 24);
 set(0,'DefaultAxesFontsize', 24);
 set(0,'DefaultLineLinewidth', 3);
 set(0,'DefaultAxesLineWidth', 3); 
-version = '';
-path(path,[pwd '/Curves/']);
-path(path,[pwd '/Tests_and_Examples/']);
-path(path,[pwd '/Roulettes/']);
+version = '0.9';
+rootdir = strrep(which('roulette1'), 'roulette1.m', '');
+path(path,[rootdir 'Curves/']);
+path(path,[rootdir 'Tests_and_Examples/']);
+path(path,[rootdir 'Roulettes/']);
 debug = 0;
 
 %

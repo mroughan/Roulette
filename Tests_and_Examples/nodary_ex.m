@@ -4,6 +4,7 @@
 %
 
 clear;
+path(path,'../');
 common;
 
 %

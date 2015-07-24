@@ -11,6 +11,7 @@
 %    see al_test.m for details of actual tests
 
 clear;
+path(path,'../');
 common;
 output_precision = 9;
 

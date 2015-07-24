@@ -1,12 +1,12 @@
 function [u, Md] = roulette2(func1, funcd1, func2, funcd2, M, u1, u2, s)
 %
-% roulette1.m, (c) Matthew Roughan, 2013
+% roulette2.m, (c) Matthew Roughan, 2013
 %
 % created: 	Mon Nov 25 2013 
 % author:  	Matthew Roughan 
 % email:   	matthew.roughan@adelaide.edu.au
 % 
-% ROULETTE1 
+% ROULETTE2 
 %         Calculates the roulette of one curve with respect to the a second
 %         See 
 %            "The General Theory of Roulettes", Gordon Walker, National Mathematics Magazine,
@@ -60,7 +60,7 @@ q = M(:,2);
 N = size(M,1);
 
 s = s(:);
-u = zeros(size(s),2);
+u = zeros(length(s),2);
 
 % find points along the curve at distances s, where
 %    s = arclength(funcd, u)

@@ -10,6 +10,7 @@
 %
 %
 clear;
+path(path,'../');
 common;
 output_precision = 3;
 

@@ -24,13 +24,17 @@ tests assume you have the second more accurate method for doing
 calculations of arc lengths. 
 
 ### Install
-    
-Put the files in a directory that Matlab can see, and edit the
-`common.m` file to either include the elliptic integral code or
-not. Then run the tests to see if everything works, and use them as an
+   
+Change into the main directory, and run "common.m" to put the
+subdirectories on the path. 
+
+Edit elliptic_int_test.m to show the path to the elliptical integral
+code if this is installed, or leave it blank if not (results will be
+potentially faster and more accurate with that code).
+
+Then run the tests to see if everything works, and use them as an
 example to get things going.
 
-`common.m` also adds some paths for the subdirectories.
 
 ### Contents
 
@@ -100,4 +104,4 @@ There is also an script that will create some animations in the
 Animations/ directory.
 
 
-Matt Roughan, 2013
+Matt Roughan, 2015

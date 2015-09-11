@@ -21,7 +21,10 @@ function [points, s] = ellipse(parameters, theta)
 %         points       = Nx2 set of (x,y) coordinates of points on the ellipse
 %         s            = Nx1 vector of arclengths from -ve y-axis 
 %
-common;
+
+path(path,'../');
+elliptic_int_test;
+
 
 % check inputs
 theta = theta(:);  % make it a column vector

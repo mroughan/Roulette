@@ -24,9 +24,16 @@ function [x, y, x_lim, y_lim] = nodary(parameters,  mu)
 %         x_lim = x values of 4 limiting points
 %         y_lim = y values of 4 limiting points
 %
+% EXAMPLE
+%   a = 1.0;
+%   b = 1.5;
+%   parameters = [0, -b, a, b];
+%   [x_nodary,y_nodary,x_lim,y_lim] = nodary(parameters, -10:0.1:10);
+%   plot(x_nodary,y_nodary, 'm--');
+%
 
-% find out if elliptic integrals are available
-common;
+path(path,'../');
+elliptic_int_test;
 
 % process inputs
 mu = mu(:);

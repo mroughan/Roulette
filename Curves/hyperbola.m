@@ -24,7 +24,9 @@ function [point, s] = hyperbola(parameters, mu)
 %         point = Nx2 set of (x,y) coordinates of points on the ellipse
 %         
 %
-common;
+
+path(path,'../');
+elliptic_int_test;
 
 
 % check inputs
@@ -60,7 +62,7 @@ k = b/c;
 if (elliptic_available)
   [F,E,Z] = elliptic12(phi, k^2);
 else
-  for i=1:length(theta)
+  for i=1:length(mu)
     E(i) = quad( @(u) sqrt(1 - k^2*sin(u).^2), 0, phi(i));
     F(i) = quad( @(u) 1./sqrt(1 - k^2*sin(u).^2), 0, phi(i));
   end

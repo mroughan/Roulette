@@ -18,11 +18,18 @@ function [x,y] = undulary(parameters, theta)
 % OUTPUTS:        
 %         (x,y) = points along the undulary
 %         
-%         
-%
+% EXAMPLE
+%    a = 2;
+%    b = 1.5;
+%    parameters = [0, b, a, b];
+%    theta = -5:0.02:15;
+%    [x,y] = undulary(parameters, theta);
+%    plot(x,y);
+% 
 
-% find out if elliptic integrals are available
-common;
+path(path,'../');
+elliptic_int_test;
+
 
 % check inputs
 if (nargin < 2)
@@ -54,7 +61,7 @@ M = k^2;
 
 % or even simpler
 tmp = sqrt( (1-e*sin(theta)) ./ ( 1+e*sin(theta)) ); 
-x = focus*cos(theta).*tmp + ell;
+x = focus*cos(theta).*tmp + ell';
 y = b*tmp;
 
 % and matched more or less to

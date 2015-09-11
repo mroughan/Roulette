@@ -12,7 +12,6 @@
 clear;
 path(path,'../');
 common;
- 
 
 % 
 % epicycloid (roll one circle outside another)
